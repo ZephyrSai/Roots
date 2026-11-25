@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roots — Tongues, Genes & Gods</title>
+<meta name="description" content="An animated, map-driven journey through 70,000 years of South Asian and Indo-European history: who arrived when, how Dravidian and Indo-Aryan languages took shape, how the gods of India, Iran, Greece, Rome and Scandinavia share a family tree, and how religions branched and braided.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+Devanagari:wght@400;600&family=Noto+Serif+Tamil:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/app.css">
+<script type="importmap">
+{ "imports": {
+  "d3": "https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm",
+  "topojson-client": "https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/+esm"
+} }
+</script>
+</head>
+<body>
+<canvas id="map"></canvas>
+<div id="vignette"></div>
+
+<header class="top">
+  <button class="brand" id="homeBtn" title="Back to the beginning">
+    <svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M16 29V14"/><path d="M16 18c-4-1-7-4-8-9M16 15c3-1 6-4 6-9M16 22c-5 0-9-2-11-5M16 21c4 0 8-2 10-6"/><path d="M16 29c-2 0-5 1-7 2M16 29c2 0 5 1 7 2"/></g></svg>
+    <span>Roots</span>
+  </button>
+  <nav id="chapNav" class="chap-nav" aria-label="Chapters"></nav>
+  <div class="top-right">
+    <div class="seg" id="modeSeg" role="tablist">
+      <button data-mode="story" class="on">Story</button>
+      <button data-mode="explore">Free explore</button>
+    </div>
+    <button class="icon-btn" id="labelsBtn" title="Toggle labels (L)">Aa</button>
+    <button class="icon-btn" id="bordersBtn" title="Toggle modern borders (B)">⌗</button>
+    <button class="icon-btn" id="toolsBtn" title="Interactive tools (T)">✦</button>
+  </div>
+</header>
+
+<aside id="story" class="story collapsed">
+  <div class="story-inner">
+    <div class="kicker"><span id="chNum"></span><span id="chEra"></span></div>
+    <h1 id="chTitle"></h1>
+    <div id="stepBody" class="step-body"></div>
+    <div id="stepActions" class="step-actions"></div>
+  </div>
+  <div class="story-nav">
+    <button id="prevBtn" class="nav-btn" title="Previous (←)">←</button>
+    <div id="stepDots" class="step-dots"></div>
+    <button id="nextBtn" class="nav-btn primary" title="Next (→ / space)">Next →</button>
+  </div>
+</aside>
+
+<div id="legend" class="legend"></div>
+
+<footer id="timeline" class="timeline">
+  <button id="playBtn" class="play" title="Play through time (P)">▶</button>
+  <div class="track-wrap">
+    <div id="track" class="track">
+      <div id="eraBands" class="era-bands"></div>
+      <div id="ticks" class="ticks"></div>
+      <div id="playhead" class="playhead"><div class="ph-label" id="phLabel"></div></div>
+    </div>
+  </div>
+  <div class="year-big" id="yearBig"></div>
+</footer>
+
+<div id="tip" class="tip"></div>
+<div id="info" class="info hidden"></div>
+
+<section id="overlay" class="overlay hidden" aria-modal="true">
+  <div class="ov-head">
+    <div><div class="ov-kicker" id="ovKicker"></div><h2 id="ovTitle"></h2></div>
+    <button id="ovClose" class="icon-btn" title="Close (Esc)">✕</button>
+  </div>
+  <div id="ovBody" class="ov-body"></div>
+</section>
+
+<section id="tools" class="tools hidden">
+  <h3>Interactive tools</h3>
+  <div id="toolList"></div>
+</section>
+
+<section id="intro" class="intro">
+  <div class="intro-card">
+    <div class="intro-kicker">An animated atlas · 72,000 years · one subcontinent and its cousins</div>
+    <h1>Roots</h1>
+    <h2>Tongues, genes &amp; gods</h2>
+    <p>Who were the first people of South Asia? Where did Tamil and its sisters come from — and why is Hindi closer to English than to Tamil? Why do Zeus, Jupiter, Dyauṣ Pitā and Týr share a name, and why are the <em>devas</em> gods in India but demons in Iran? Follow the people, the words and the gods as they move, mix and branch.</p>
+    <div class="intro-cta">
+      <button id="beginBtn" class="cta">Begin the journey</button>
+      <button id="exploreBtn" class="cta ghost">Explore freely</button>
+    </div>
+    <div class="intro-keys">← → step · drag to spin the globe · scroll to zoom · T tools</div>
+  </div>
+</section>
+
+<div id="loading" class="loading"><div class="spin"></div><span>Drawing the world…</span></div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
